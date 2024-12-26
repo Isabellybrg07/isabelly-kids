@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula APIs</title>
+</head>
+
+<body>
+    <input id="cep" type="text" placeholder="Digite seu CEP">
+    <button onclick="buscarCEP()">Buscar CEP</button>
+    <br><br>
+    Rua: <input id="rua" type="text" disabled="disabled">
+    <br><br>
+    Complemento: <input id="complemento" type="text" disabled="disabled">
+    <br><br>
+    Bairro: <input id="bairro" type="text" disabled="disabled">
+    
+</body>
+
+<script>
+    /*
+    Estrutura básica da função fetch
+    fetch(url)
+    .then(resposta => resposta.json())
+    .then(dados => função)
+    .catch(erro => função)
+    */
+
+    //API para busca de endereço pelo cep
+    function buscarCEP(){
+
+        let cep = document.getElementById('cep').value
+        console.log(cep)
+        let urlAPI = `https://viacep.com.br/ws/${cep}/json/`
+
+        fetch(urlAPI)
+            .then(resposta => resposta.json())
+            .then(dados => {
+                document.getElementById('rua').value = dados.logradouro
+                document.getElementById('complemento').value = dados.complemento
+                document.getElementById('bairro').value = dados.bairro
+
+
+            })
+            .catch(erro => console.log(erro))
+
+    }
+    
+
+    
+
+
+</script>
+
+</html>
+
